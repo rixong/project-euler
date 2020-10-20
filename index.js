@@ -145,16 +145,18 @@ function checkProducts(num, multiplier) {
   return false;
 }
 
-function smallestMultple(multiplier) {
+function smallestMultple(multiplier) {   ///@20 1040 ms  take 2 140ms
   const start = performance.now();
   let num = multiplier;
+  let count = 1;
   while (true) {
     if (checkProducts(num, multiplier)) {
       console.log(performance.now() - start);
       return num;
     }
-    num += 1;
+    num = multiplier * count;
+    count += 1;
   }
 }
 
-console.log(smallestMultple(10));
+console.log(smallestMultple(20));
