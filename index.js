@@ -89,7 +89,7 @@ loop i 10 - 99
 
 */
 
-function largestPalindromeProduct() {
+/* function largestPalindromeProduct() {
   const max = {
     product: 0,
     i: 0,
@@ -99,11 +99,10 @@ function largestPalindromeProduct() {
   for (let i = 100; i < 1000; i += 1) {
     for (let j = 100; j < 1000; j += 1) {
       const prod = (i * j).toString();
-      // const prod = '9009';
       const firstHalf = prod.slice(0, Math.floor(prod.length / 2));
       const secondHalfReversed = prod.slice(Math.ceil(prod.length / 2)).split('').reverse().join('');
       if (firstHalf === secondHalfReversed && i * j > max.product) {
-        console.log(firstHalf, secondHalfReversed);
+        // console.log(firstHalf, secondHalfReversed);
         max.product = prod;
         max.i = i;
         max.j = j;
@@ -114,4 +113,48 @@ function largestPalindromeProduct() {
 }
 
 console.log(largestPalindromeProduct());
+ */
 
+/* 
+ 
+Problem: Smallest Multiple
+2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without any remainder.
+What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?
+Instructions
+Code your procedural solution into the lib/smallest_multiple.rb file.
+Code your object-oriented solution into the lib/oo_smallest_multiple.rb file.
+Run learn until you get all of the RSpec tests to pass.
+
+Pseudo Code:
+Smallest number possible needs to at least equal num.
+Start with num;
+Check if divisble by all numbers using recursive function:
+  Base: product = 1 => return true
+  Start from high to low - if number is not divisible by 20 goto to 20 -1, etc until you reach base;
+  else return false
+
+*/
+
+function checkProducts(num, multiplier) {
+  if (multiplier === 1) {
+    return true;
+  }
+  if (num % multiplier === 0) {
+    return checkProducts(num, multiplier - 1);
+  }
+  return false;
+}
+
+function smallestMultple(multiplier) {
+  const start = performance.now();
+  let num = multiplier;
+  while (true) {
+    if (checkProducts(num, multiplier)) {
+      console.log(performance.now() - start);
+      return num;
+    }
+    num += 1;
+  }
+}
+
+console.log(smallestMultple(10));
