@@ -50,7 +50,7 @@ while result
 
 */
 
-function largestPrime(n) {
+/* function largestPrime(n) {
   let result = n;
   for (let i = 2; i < result; i += 1) {
     while (result % i === 0 && result !== i) {
@@ -60,9 +60,58 @@ function largestPrime(n) {
   return result;
 }
 
-console.log(largestPrime(6857));
+console.log(largestPrime(6857)); */
 
-// i =   2  2
-// res = 4  2
+/* 
+Largest Palindrome Product
+Problem
+What is the largest palindrome product of two three-digit numbers?
 
+Background
+A palindromic number reads the same both ways. 
+For instance, 101 is a palindrome, as is 91,519 and 1,111.
+
+For example, The largest palindrome made from the product of two two-digit numbers is 9009:
+
+Pseudo Code:
+n=number digits
+
+Store max;
+
+loop i 10 - 99
+  inner loop j 10 - 99
+    check if 1*j is palidrome:
+      res to string
+      split at midpoint
+      reverse 2nd half and compare.
+      if the same, convert back to int and compare wtih max, replacing if greater.
+
+
+*/
+
+function largestPalindromeProduct() {
+  const max = {
+    product: 0,
+    i: 0,
+    j: 0,
+  };
+
+  for (let i = 100; i < 1000; i += 1) {
+    for (let j = 100; j < 1000; j += 1) {
+      const prod = (i * j).toString();
+      // const prod = '9009';
+      const firstHalf = prod.slice(0, Math.floor(prod.length / 2));
+      const secondHalfReversed = prod.slice(Math.ceil(prod.length / 2)).split('').reverse().join('');
+      if (firstHalf === secondHalfReversed && i * j > max.product) {
+        console.log(firstHalf, secondHalfReversed);
+        max.product = prod;
+        max.i = i;
+        max.j = j;
+      }
+    }
+  }
+  return max;
+}
+
+console.log(largestPalindromeProduct());
 
